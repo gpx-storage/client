@@ -1,28 +1,14 @@
-import React, { useCallback, useState } from 'react';
-import Button from '@material-ui/core/Button';
-import axios from '../lib/axios';
-import { getUserToken } from '../lib/authentication';
+import React from 'react';
+import OTPManagement from '../components/OTPManagement';
 
 export default function Dashboard() {
-  const [otpUrl, setOtpUrl] = useState('');
-  const [tmpToken, setTmpToken] = useState('');
-  const setUpTOTPDevice = useCallback(async () => {
-    const response = await axios.get('/auth/totp/create', {
-      headers: {
-        'Authorization': `Bearer ${getUserToken()}`
-      }
-    });
-    setOtpUrl(response.data.otp_url);
-    setTmpToken(response.data.tmp_token);
-  }, [])
-
   return (
     <>
-      <div>
-        <Button variant="contained" onClick={setUpTOTPDevice}>Setup a new TOTP device</Button><br />
-        OTP url: {otpUrl}<br />
-        TMP token: {tmpToken}
-      </div>
+      <h1>Dashboard</h1>
+      <section>
+        <h2>Security</h2>
+        <OTPManagement />
+      </section>
     </>
   )
 }

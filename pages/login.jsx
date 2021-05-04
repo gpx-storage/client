@@ -37,7 +37,9 @@ export default function SignIn() {
       await login(formData.email, formData.password);
       router.push('/dashboard');
     } catch (error) {
-      window.alert(error);
+      if (error.response.status === 400) {
+        window.alert('Wrong credentials');
+      }
     }
   }, [formData]);
 

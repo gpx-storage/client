@@ -1,8 +1,21 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Footer from '../components/Footer'
 import Container from '@material-ui/core/Container';
+import { onActionMessage } from '../lib/window';
+import '../styles/main.scss';
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  
+  useEffect(() => {
+    onActionMessage('authentication.unauthorized', () => {
+      console.log('Redirecting to the login route...');
+      router.push('/login');
+    })
+  }, [])
+  
   return (
     <>
       <Head>

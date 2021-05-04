@@ -1,6 +1,10 @@
 export default {
   setItem(name: string, value: any) {
-    sessionStorage.setItem(name, value);
+    let strValue = value;
+    if (typeof value !== 'object') {
+      strValue = JSON.stringify(value);
+    }
+    sessionStorage.setItem(name, strValue);
   },
   getItem(name: string) {
     return sessionStorage.getItem(name);
